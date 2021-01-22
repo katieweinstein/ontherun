@@ -1,0 +1,16 @@
+body {
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+label {
+  display: block;
+}
+
+form div {
+  margin: 1em;
+  display: inline-block;
+}
