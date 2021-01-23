@@ -16,12 +16,13 @@ class Home extends React.Component {
     this.state = {
       selectedFile: null,
     }
-    this.handleFileInput = this.handleFileInput.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.readFile = this.readFile.bind(this);
+    this.getRunObject = this.getRunObject.bind(this);
   }
 
-  handleFileInput(event) {
+  handleFileChange(event) {
     const newFile = event.target.files[0];
     this.setState({
       selectedFile: newFile
@@ -30,10 +31,7 @@ class Home extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.readFile(this.state.selectedFile, this.props.sendAllData);
-    this.setState({
-      selectedFile: null
-    });
+    this.readFile(this.state.selectedFile, this.getRunObject);
   }
 
   readFile(file, callback) {
@@ -44,16 +42,37 @@ class Home extends React.Component {
     reader.readAsText(file);
   }
 
+  async getRunObject(data) {
+    const columnInfo = data.split('\n')[0].split(',');
+    let runs = [];
+    for (let i = 0; i < columnInfo.length; i++) {
+      runs.push({[columnInfo[i].replace(/["]+/g, '')]: []});
+    }
+    const rows = data.split('\n')
+    for (let i = 1; i < rows.length; i++) {
+      const column = rows[i].split(',');
+      for (let j = 0; j < column.length; j++) {
+        const key = Object.keys(runs[j]);
+        runs[j][key].push(column[j].replace(/["]+/g, ''));
+      }
+    }
+    await this.props.sendAllData(runs);
+  }
+
   render() {
     return (
       <div>
         <h3>Welcome!</h3>
         <form onSubmit={this.handleSubmit}>
-          <input type="file" onChange={this.handleFileInput} />
+          <input type="file" onChange={this.handleFileChange}/>
           <input type="submit"/>
         </form>
-        <div id="out">{this.props.data || []}</div>
-        {/* //   <VictoryChart theme={VictoryTheme.material} domainPadding={20}
+           {this.props.data.length ?
+           this.props.data.map((item) => {
+             const key = Object.keys(item)
+            return <div>{item[key]}</div>
+           })
+        //    <VictoryChart theme={VictoryTheme.material} domainPadding={20}
         //     containerComponent={<VictoryContainer responsive={false}/>}>
         //     <VictoryAxis
         //       // tickValues specifies both the number of ticks and where
@@ -67,11 +86,12 @@ class Home extends React.Component {
         //       tickFormat={(x) => (`$${x / 1000}k`)}
         //     />
         //     <VictoryBar
-        //       data={data}
+        //       data={this.props.data}
         //       x="quarter"
         //       y="earnings"
         //     />
-        // </VictoryChart> */}
+        // </VictoryChart>)
+        : <div></div>}
       </div>
     )
   }
