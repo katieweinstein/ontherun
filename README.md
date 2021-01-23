@@ -20,7 +20,7 @@ If you want to run the server and/or `webpack` separately, you can also
 
 Extract your data from Garmin Connect as a .csv file using the following instructions from Garmin's site:
 
-Export all uploaded activities as a CSV file
+Export all RUNNING activities as a CSV file:
 
 1. Sign in to your Garmin Connect account
 
@@ -34,7 +34,6 @@ Export all uploaded activities as a CSV file
 
 6. Save the file
 
-Filtering the list of activities by Activity Type can narrow down the number of activities exported to CSV.
 Scrolling to the bottom of the list of activities then selecting Export to CSV will export all activities in the list.
 The file(s) have now been exported from Garmin Connect and saved to the computer.
 
@@ -42,5 +41,4 @@ Click the 'Upload File' button on the site, and then hit submit.
 
 ## CURRENT BEHAVIOR:
 
-All of your data should be displayed as long rows of the same thing over and over again.
-Or it might not get displayed at all, idk I just started writing this today.
+After submitting a CSV file, you should see a pie chart (potentially with overlapping labels) displaying your run durations.
