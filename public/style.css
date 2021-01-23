@@ -14,3 +14,7 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.chartDiv {
+  height: 500px;
+}

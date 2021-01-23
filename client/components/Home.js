@@ -1,14 +1,7 @@
 import React from 'react'
 import {sendAllData} from '../store/data'
 import {connect} from 'react-redux'
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme, VictoryContainer } from 'victory';
-
-// const data = [
-//   {quarter: 1, earnings: 13000},
-//   {quarter: 2, earnings: 16500},
-//   {quarter: 3, earnings: 14250},
-//   {quarter: 4, earnings: 19000}
-// ];
+import {PieChart} from './index'
 
 class Home extends React.Component {
   constructor() {
@@ -44,16 +37,16 @@ class Home extends React.Component {
 
   async getRunObject(data) {
     const columnInfo = data.split('\n')[0].split(',');
-    let runs = [];
+    let runs = {};
     for (let i = 0; i < columnInfo.length; i++) {
-      runs.push({[columnInfo[i].replace(/["]+/g, '')]: []});
+      runs[columnInfo[i].replace(/["]+/g, '')] = [];
     }
-    const rows = data.split('\n')
-    for (let i = 1; i < rows.length; i++) {
-      const column = rows[i].split(',');
+    const row = data.split('\n')
+    for (let i = 1; i < row.length; i++) {
+      const column = row[i].split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/);
       for (let j = 0; j < column.length; j++) {
-        const key = Object.keys(runs[j]);
-        runs[j][key].push(column[j].replace(/["]+/g, ''));
+        const keys = Object.keys(runs);
+        runs[keys[j]].push(column[j].replace(/["]+/g, ''));
       }
     }
     await this.props.sendAllData(runs);
@@ -67,30 +60,8 @@ class Home extends React.Component {
           <input type="file" onChange={this.handleFileChange}/>
           <input type="submit"/>
         </form>
-           {this.props.data.length ?
-           this.props.data.map((item) => {
-             const key = Object.keys(item)
-            return <div>{item[key]}</div>
-           })
-        //    <VictoryChart theme={VictoryTheme.material} domainPadding={20}
-        //     containerComponent={<VictoryContainer responsive={false}/>}>
-        //     <VictoryAxis
-        //       // tickValues specifies both the number of ticks and where
-        //       // they are placed on the axis
-        //       tickValues={[1, 2, 3, 4]}
-        //       tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
-        //     />
-        //     <VictoryAxis
-        //       dependentAxis
-        //       // tickFormat specifies how ticks should be displayed
-        //       tickFormat={(x) => (`$${x / 1000}k`)}
-        //     />
-        //     <VictoryBar
-        //       data={this.props.data}
-        //       x="quarter"
-        //       y="earnings"
-        //     />
-        // </VictoryChart>)
+           {Object.keys(this.props.data).length ?
+            <PieChart></PieChart>
         : <div></div>}
       </div>
     )
