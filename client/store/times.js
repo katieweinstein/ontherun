@@ -1,3 +1,5 @@
+// This file stores running times in the store.
+
 const GET_TIMES = 'GET_TIMES'
 
 const getTimes = (times) => ({type: GET_TIMES, times})

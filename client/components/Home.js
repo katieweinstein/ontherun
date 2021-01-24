@@ -2,6 +2,7 @@ import React from 'react'
 import {sendAllData} from '../store/data'
 import {connect} from 'react-redux'
 import {PieChart, Statistics, LineChart} from './index'
+import {createRunObject} from '../functions'
 
 class Home extends React.Component {
   constructor() {
@@ -25,9 +26,17 @@ class Home extends React.Component {
   }
 
   // This will pass the submitted file from state to the read file function.
+  // It will also provide error handling for non-csv files.
   handleSubmit(event) {
     event.preventDefault();
-    this.readFile(this.state.selectedFile, this.getRunObject);
+    const fileName = this.state.selectedFile.name.split('.');
+    const extension = fileName[fileName.length - 1];
+    if (extension.toLowerCase() !== 'csv') {
+      document.getElementById('invalid').innerText = "Please select a .csv file."
+    } else {
+      document.getElementById('invalid').innerText = ""
+      this.readFile(this.state.selectedFile, this.getRunObject);
+    }
   }
 
   // This function reads the file as a string and sends it to getRunObject.
@@ -39,62 +48,45 @@ class Home extends React.Component {
     reader.readAsText(file);
   }
 
-  // The file will be parsed and sent to the store via dispatch at the end.
+  // Data is sent to a function that organizes it into objects.
+  // See '/client/functions' line 1.
   async getRunObject(data) {
-
-    // Create a "runs" object that will hold all of our data as key value pairs,
-    // the key being the column header (Time, Distance, Laps, etc),
-    // and the value being an array that holds all of the data.
-    let runs = {};
-    const columnInfo = data.split('\n')[0].split(',');
-
-    // Go through the first row and create keys in the runs object
-    for (let i = 0; i < columnInfo.length; i++) {
-      runs[columnInfo[i].replace(/["]+/g, '')] = [];
-    }
-
-    // Split the data into rows, iterate through all rows (except the first),
-    // and store each piece of data in its corresponding array.
-    const row = data.split('\n')
-    for (let i = 1; i < row.length; i++) {
-
-      // This regex splits each row by commas NOT enclosed in quotations
-      const column = row[i].split(/,(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/);
-      for (let j = 0; j < column.length; j++) {
-        const keys = Object.keys(runs);
-        runs[keys[j]].push(column[j].replace(/["]+/g, ''));
-      }
-    }
+    const runs = createRunObject(data);
     await this.props.sendAllData(runs);
   }
 
   render() {
     return (
       <div>
-        <div className="container">
-          <h3>How to see your data:</h3>
-          <div className="row">
-            <ol className="col-8">
-              <li>Log in to your <a href="https://connect.garmin.com/signin/?service=https%3A%2F%2Fconnect.garmin.com%2Fmodern%2F">Garmin Connect</a> account.</li>
-              <li>On the lefthand navbar, click "Activities", and then "All Activities".</li>
-              <li>Click on the running man button to filter by runs only.</li>
-              <li>Scroll down through your activities until you reach the bottom (or as far as you want!).</li>
-              <li>Click the "Export CSV" link in the upper right hand corner underneath your profile picture.</li>
-              <li>Upload your CSV!</li>
-            </ol>
-            <form onSubmit={this.handleSubmit} className="col-3">
-              <input type="file" onChange={this.handleFileChange} className="btn btn-outline-secondary mb-3"/>
-              <input type="submit" value="See My Data" className="btn btn-outline-secondary mx-auto"/>
-            </form>
+        <div className="container mainPage">
+          <div>
+            <h3>How to see your data:</h3>
+            <div className="row">
+              <ol className="col-8">
+                <li>Log in to your <a href="https://connect.garmin.com/signin/?service=https%3A%2F%2Fconnect.garmin.com%2Fmodern%2F">Garmin Connect</a> account.</li>
+                <li>On the lefthand navbar, click "Activities", and then "All Activities".</li>
+                <li>Click on the running man button to filter by runs only.</li>
+                <li>Scroll down through your activities until you reach the bottom (or as far as you want!).</li>
+                <li>Click the "Export CSV" link in the upper right hand corner underneath your profile picture.</li>
+                <li>Upload your CSV!</li>
+              </ol>
+              <form onSubmit={this.handleSubmit} className="col-3">
+                <input type="file" onChange={this.handleFileChange} className="btn btn-outline-light mb-3"/>
+                <input type="submit" value="See My Data" className="btn btn-outline-light mx-auto"/>
+                <div id="invalid"></div>
+              </form>
+            </div>
           </div>
         </div>
         {Object.keys(this.props.data).length ?
           <div className="m-3">
             <Statistics/>
-            <div className="container mt-5">
-              <div className="row">
-                <PieChart className="col"/>
-                <LineChart className="col"/>
+            <div className="row mt-5">
+              <div className="col">
+                <PieChart />
+              </div>
+              <div className="col">
+                <LineChart />
               </div>
             </div>
           </div>

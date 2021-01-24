@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import Chart from "react-google-charts";
+import Chart from "react-google-charts"
 import {sendCadenceAndPace} from '../store/cadencePace'
+import {paceToDecimal} from '../functions'
 
 class LineChart extends React.Component {
   constructor() {
@@ -30,7 +31,7 @@ class LineChart extends React.Component {
       } else {
         const cadenceNum = parseInt(cadenceArray[i]);
         cadenceArray.splice(i, 1, cadenceNum);
-        const paceNum = parseInt(paceArray[i]);
+        const paceNum = paceToDecimal(paceArray[i]);
         paceArray.splice(i, 1, paceNum);
       }
     }
@@ -51,29 +52,27 @@ class LineChart extends React.Component {
 
   render() {
     return (
-      // <div></div>
       <Chart
-        width={'600px'}
-        height={'400px'}
+        width='100%'
+        height='300px'
         chartType="Line"
         loader={<div>Loading Chart</div>}
         data={this.props.cadencePace}
         options={{
           chart: {
             title:
-              'Average Cadence Per Run vs Average Pace Per Run',
-          },
-          series: {
-            0: { axis: 'Temps' },
-            1: { axis: 'Daylight' },
-          },
-          axes: {
-            // Adds labels to each axis; they don't have to match the axis names.
-            y: {
-              Cadence: { label: 'Avg Cadence' },
-              Pace: { label: 'Avg Pace' },
+                'Average Cadence Per Run vs Average Pace Per Run',
             },
-          },
+            series: {
+              0: { axis: 'Temps' },
+              1: { axis: 'Daylight' },
+            },
+            axes: {
+              y: {
+                Cadence: { label: 'Avg Cadence' },
+                Pace: { label: 'Avg Pace (Decimal)' },
+              },
+            },
         }}
       />
     )

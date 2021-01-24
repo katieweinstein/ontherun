@@ -14,6 +14,8 @@ class PieChart extends React.Component {
     this.getTime();
   }
 
+  // This organizes our data by time and sends it to the store in the format
+  // required by Google Charts.
   async getTime() {
     const timeArray = this.props.data.Time;
     const underThirty = timeArray.filter((item) => item > '00:00:00' && item <= '00:30:00').length;
@@ -27,8 +29,7 @@ class PieChart extends React.Component {
   render() {
    return (
       <Chart
-        width={'500px'}
-        height={'300px'}
+        width='100%'
         chartType="PieChart"
         loader={<div>Loading Chart...</div>}
         data={this.props.times}

@@ -17,12 +17,37 @@ form div {
 
 h1 {
   font-family: 'Permanent Marker', cursive;
+  width: 50%;
 }
 
 h3 {
   font-family: 'Permanent Marker', cursive;
+  padding: 10px;
 }
 
-.instructions {
-  width: 75%;
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.mainPage {
+  background-color: #d18080;
+  border-radius: 2em;
+  padding: 15px;
+}
+
+.mainPage ol {
+  margin-left: 30px;
+}
+
+.highlight {
+  background: url(https://www.onlygfx.com/wp-content/uploads/2017/05/colorful-watercolor-brush-stroke-banner-2-18.png);
+  background-repeat: no-repeat;
+  background-size: 100% 95%;
+  padding: 8px 0;
+}
+
+#invalid {
+  color: red;
+  font-size: small;
 }

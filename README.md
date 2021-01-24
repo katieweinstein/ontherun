@@ -41,4 +41,4 @@ Click the 'Upload File' button on the site, and then hit submit.
 
 ## CURRENT BEHAVIOR:
 
-After submitting a CSV file, you should see a pie chart (potentially with overlapping labels) displaying your run durations.
+After submitting a CSV file, you should see a pie chart, a double-axis line graph, and a sentence about your running history.

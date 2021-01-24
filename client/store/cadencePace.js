@@ -1,3 +1,5 @@
+// This stores data for our cadence and pace line chart and send it to the store.
+
 const GET_CADENCE_AND_PACE = 'GET_CADENCE_AND_PACE'
 
 const getCadenceAndPace = (cadencePace) => ({type: GET_CADENCE_AND_PACE, cadencePace})
