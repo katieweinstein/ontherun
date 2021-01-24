@@ -1,7 +1,7 @@
 import React from 'react'
 import {sendAllData} from '../store/data'
 import {connect} from 'react-redux'
-import {PieChart, Statistics} from './index'
+import {PieChart, Statistics, LineChart} from './index'
 
 class Home extends React.Component {
   constructor() {
@@ -91,7 +91,12 @@ class Home extends React.Component {
         {Object.keys(this.props.data).length ?
           <div className="m-3">
             <Statistics/>
-            <PieChart/>
+            <div className="container mt-5">
+              <div className="row">
+                <PieChart className="col"/>
+                <LineChart className="col"/>
+              </div>
+            </div>
           </div>
           : <div></div>}
       </div>
