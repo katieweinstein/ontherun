@@ -3,6 +3,7 @@
  * This way, we can import all of our components from the same place, rather than
  * having to figure out which file they belong to!
  */
-export {default as Navbar} from './navbar'
+export {default as Navbar} from './Navbar'
 export {default as Home} from './Home'
 export {default as PieChart} from './PieChart'
+export {default as Statistics} from './Statistics'

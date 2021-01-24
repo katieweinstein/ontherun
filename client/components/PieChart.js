@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {VictoryPie} from 'victory'
 import {sendAllTimes} from '../store/times'
+import Chart from "react-google-charts";
 
 class PieChart extends React.Component {
   constructor() {
@@ -9,6 +9,7 @@ class PieChart extends React.Component {
     this.getTime = this.getTime.bind(this);
   }
 
+  // This loads and sorts our pie chart data when the component loads.
   componentDidMount() {
     this.getTime();
   }
@@ -20,30 +21,29 @@ class PieChart extends React.Component {
     const hourToNinety = timeArray.filter((item) => item > '01:00:00' && item <= '01:30:00').length;
     const ninetyToTwoHours = timeArray.filter((item) => item > '01:30:00' && item < '02:00:00').length;
     const overTwoHours = timeArray.filter((item) => item > '02:00:00').length;
-    await this.props.sendAllTimes([{x: "Under 30 Minutes", y: underThirty}, {x: "Thirty Minutes to an Hour", y: thirtyToHour}, {x: "An Hour to 90 Minutes", y: hourToNinety}, {x: "90 Minutes to 2 Hours", y: ninetyToTwoHours}, {x: "Over 2 Hours", y: overTwoHours}]);
+    await this.props.sendAllTimes([["Duration of Run", "Number of Runs"], ["<30 Minutes", underThirty], ["30-60 Minutes", thirtyToHour], ["60-90 Minutes", hourToNinety], ["90-180 Minutes", ninetyToTwoHours], [">180 Minutes", overTwoHours]]);
   }
 
   render() {
    return (
-     <div className="chartDiv">
-      <VictoryPie
-        innerRadius={75}
-        labelPosition={({ index }) => index
-          ? "centroid"
-          : "centroid"
-        }
-        colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
-        data={this.props.timeData}
+      <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="PieChart"
+        loader={<div>Loading Chart...</div>}
+        data={this.props.times}
+        options={{
+          title: 'Run Durations',
+        }}
       />
-     </div>
-   )
- }
+    )
+  }
 }
 
 const mapState = (state) => {
   return {
     data: state.data,
-    timeData: state.times,
+    times: state.times,
   }
 }
 
