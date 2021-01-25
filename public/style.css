@@ -41,15 +41,11 @@ h3 {
   margin-left: 30px;
 }
 
-.highlight {
+.titleBrushstroke {
   background: url(https://www.onlygfx.com/wp-content/uploads/2017/05/colorful-watercolor-brush-stroke-banner-2-18.png);
   background-repeat: no-repeat;
   background-size: 100% 95%;
   padding: 8px 0;
-}
-
-.distanceStats {
-  width: 70%;
 }
 
 #invalid {
@@ -62,4 +58,11 @@ h3 {
   background-color: #76BCBA;
   outline: solid;
   outline-color: #D7E4AF;
+}
+
+.statBrushstroke {
+  background: url(https://www.onlygfx.com/wp-content/uploads/2017/05/colorful-watercolor-brush-stroke-banner-2-22.png);
+  background-repeat: no-repeat;
+  background-size: 100% 95%;
+  padding: 8px 0;
 }

@@ -53,8 +53,6 @@ class LineChart extends React.Component {
   render() {
     return (
       <Chart
-        width='100%'
-        height='300px'
         chartType="Line"
         loader={<div>Loading Chart</div>}
         data={this.props.cadencePace}

@@ -20,7 +20,7 @@ export default class Navbar extends React.Component {
     return (
       <div>
         <div className="container">
-          <h1 className="highlight text-center m-2">On The Run</h1>
+          <h1 className="titleBrushstroke text-center m-2">On The Run</h1>
         </div>
         <div className="text-center">
           <p style={{margin: 0}}>Lifetime running data visualization by Katie Weinstein.</p>
@@ -28,8 +28,8 @@ export default class Navbar extends React.Component {
         </div>
         <div className="container" id="info" style={{display: "none"}}>
           <span className="text-center">
-            <p>Don't worry, your data isn't really going anywhere! We're only storing your data in the browser while you're here.</p>
-            <p>If you close this window or refresh the page, your data will disappear. So nobody will ever know about that one time when you underestimated how steep that hill was. Or when that easy run actually ended up being really hard. Or when you paused your watch for 10 minutes to pet a cute dog.</p>
+            <p className="pt-3">Don't worry, your data isn't going anywhere! We're only storing your data in your browser while you're here.</p>
+            <p className="pb-3">If you close this window or refresh the page, your data will disappear. So nobody will ever know about that one time you underestimated how steep that hill was. Or that easy run that ended up being really hard. Or that time you paused your watch for 10 minutes to pet a cute dog.</p>
           </span>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import {sendAllData} from '../store/data'
 import {connect} from 'react-redux'
-import {PieChart, Statistics, LineChart, DistanceStats} from './index'
+import {PieChart, Statistics, LineChart, DistanceStats, AreaChart} from './index'
 import {createRunObject} from '../functions'
 
 class Home extends React.Component {
@@ -81,15 +81,16 @@ class Home extends React.Component {
         {Object.keys(this.props.data).length ?
           <div className="m-3 p-3">
             <Statistics/>
-            <LineChart />
-            <div className="row mt-5">
-              <div className="col">
+            <div className="row mt-5 mb-4">
+              <div className="col-7 mb-3">
                 <PieChart />
               </div>
-              <div className="col">
+              <div className="col-4 mb-3">
                 <DistanceStats/>
               </div>
             </div>
+            <AreaChart />
+            <LineChart />
           </div>
           : <div></div>}
       </div>
