@@ -63,7 +63,7 @@ class Home extends React.Component {
             <h3>How to see your data:</h3>
             <div className="row">
               <ol className="col-8">
-                <li>Log in to your <a href="https://connect.garmin.com/signin/?service=https%3A%2F%2Fconnect.garmin.com%2Fmodern%2F">Garmin Connect</a> account.</li>
+                <li>Log in to your <a href="https://connect.garmin.com/signin/?service=https%3A%2F%2Fconnect.garmin.com%2Fmodern%2F" target="_blank" rel="noreferrer noopener">Garmin Connect</a> account.</li>
                 <li>On the lefthand navbar, click "Activities", and then "All Activities".</li>
                 <li>Click on the running man button to filter by runs only.</li>
                 <li>Scroll down through your activities until you reach the bottom (or as far as you want!).</li>
