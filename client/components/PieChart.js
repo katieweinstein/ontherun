@@ -23,7 +23,12 @@ class PieChart extends React.Component {
     const hourToNinety = timeArray.filter((item) => item > '01:00:00' && item <= '01:30:00').length;
     const ninetyToTwoHours = timeArray.filter((item) => item > '01:30:00' && item < '02:00:00').length;
     const overTwoHours = timeArray.filter((item) => item > '02:00:00').length;
-    await this.props.sendAllTimes([["Duration of Run", "Number of Runs"], ["<30 Minutes", underThirty], ["30-60 Minutes", thirtyToHour], ["60-90 Minutes", hourToNinety], ["90-180 Minutes", ninetyToTwoHours], [">180 Minutes", overTwoHours]]);
+    await this.props.sendAllTimes([["Duration of Run", "Number of Runs"],
+      ["<30 Minutes", underThirty],
+      ["30-60 Minutes", thirtyToHour],
+      ["60-90 Minutes", hourToNinety],
+      ["90-180 Minutes", ninetyToTwoHours],
+      [">180 Minutes", overTwoHours]]);
   }
 
   render() {

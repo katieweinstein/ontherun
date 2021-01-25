@@ -32,3 +32,23 @@ export function paceToDecimal(string) {
   const decimal = (seconds/60) + minutes
   return decimal;
 }
+
+export function mostCommonDistance(array) {
+  let mostCommon = 0;
+  let currentBest = 0;
+  let distances = {};
+
+  for (let i = 0; i < array.length; i++) {
+    if (distances[array[i]] === undefined) {
+      distances[array[i]] = 0;
+    }
+
+    distances[array[i]]++;
+
+    if (distances[array[i]] > currentBest) {
+      currentBest = distances[array[i]];
+      mostCommon = array[i]
+    }
+  }
+  return mostCommon;
+}

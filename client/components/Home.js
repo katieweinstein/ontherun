@@ -1,7 +1,7 @@
 import React from 'react'
 import {sendAllData} from '../store/data'
 import {connect} from 'react-redux'
-import {PieChart, Statistics, LineChart} from './index'
+import {PieChart, Statistics, LineChart, DistanceStats} from './index'
 import {createRunObject} from '../functions'
 
 class Home extends React.Component {
@@ -70,7 +70,7 @@ class Home extends React.Component {
                 <li>Click the "Export CSV" link in the upper right hand corner underneath your profile picture.</li>
                 <li>Upload your CSV!</li>
               </ol>
-              <form onSubmit={this.handleSubmit} className="col-3">
+              <form onSubmit={this.handleSubmit} className="col-3 me-3">
                 <input type="file" onChange={this.handleFileChange} className="btn btn-outline-light mb-3"/>
                 <input type="submit" value="See My Data" className="btn btn-outline-light mx-auto"/>
                 <div id="invalid"></div>
@@ -79,14 +79,15 @@ class Home extends React.Component {
           </div>
         </div>
         {Object.keys(this.props.data).length ?
-          <div className="m-3">
+          <div className="m-3 p-3">
             <Statistics/>
+            <LineChart />
             <div className="row mt-5">
               <div className="col">
                 <PieChart />
               </div>
               <div className="col">
-                <LineChart />
+                <DistanceStats/>
               </div>
             </div>
           </div>

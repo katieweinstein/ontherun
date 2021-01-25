@@ -33,6 +33,7 @@ h3 {
 .mainPage {
   background-color: #d18080;
   border-radius: 2em;
+  margin-top: 10px;
   padding: 15px;
 }
 
@@ -47,7 +48,18 @@ h3 {
   padding: 8px 0;
 }
 
+.distanceStats {
+  width: 70%;
+}
+
 #invalid {
   color: red;
   font-size: small;
+}
+
+#info {
+  width: 50%;
+  background-color: #76BCBA;
+  outline: solid;
+  outline-color: #D7E4AF;
 }
