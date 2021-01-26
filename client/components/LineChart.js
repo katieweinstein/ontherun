@@ -43,7 +43,7 @@ class LineChart extends React.Component {
 
   convertToData() {
     const lineChartData = [];
-    lineChartData.push(['Runs (Oldest to Newest)', 'Average Cadence', 'Average Pace']);
+    lineChartData.push(['Runs (Oldest to Newest)', 'Avg Cadence', 'Avg Pace (Decimal)']);
     for (let i = 0; i < this.state.cadenceArray.length; i++) {
       lineChartData.push([i, this.state.cadenceArray[i], this.state.paceArray[i]]);
     }

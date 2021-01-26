@@ -30,7 +30,7 @@ class DistanceStats extends React.Component {
     return (
       <div className="statBrushstroke text-center mx-auto">
         <h3>Your longest run was {this.state.longestRun} miles, but your favorite distance was {this.state.mostCommon} miles.</h3>
-        {this.state.longestRun > 26.2 ?
+        {this.state.longestRun >= 26.2 ?
         <p>Wow, you've run a marathon! Congrats! 🎉</p> :
         <div></div>}
       </div>

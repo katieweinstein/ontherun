@@ -23,7 +23,7 @@ class Statistics extends React.Component {
     const totalMiles = this.props.data.Distance.reduce((total, num) => {return total + parseFloat(num)}, 0);
     const runCount = this.props.data['Activity Type'].filter((item) => item.includes("Running"));
     this.setState({
-      firstDate: Moment(firstDate).format("MMMM d, yyyy"),
+      firstDate: Moment(firstDate).format("LL"),
       totalMiles: totalMiles.toFixed(2),
       runCount: runCount.length,
     })
