@@ -2,7 +2,6 @@
 
 _Data visualization for runners who love data!_
 
-THIS SITE IS CURRENTLY IN DEVELOPMENT. PLEASE DO NOT JUDGE MY CODE YET, I AM BUT A BABY IN THE WORLD OF PROGRAMMING.
 
 ## Setup
 
@@ -38,7 +37,3 @@ Scrolling to the bottom of the list of activities then selecting Export to CSV w
 The file(s) have now been exported from Garmin Connect and saved to the computer.
 
 Click the 'Upload File' button on the site, and then hit submit.
-
-## CURRENT BEHAVIOR:
-
-After submitting a CSV file, you should see a pie chart, a double-axis line graph, and a sentence about your running history.
